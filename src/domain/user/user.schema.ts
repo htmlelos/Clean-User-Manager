@@ -1,17 +1,15 @@
-import{ Document, Model, Schema } from "mongoose";
-import IUser from "./user.types";
-
-interface IUserDocument extends IUser, Document {}
+import mongoose, { Schema } from 'mongoose'
+import { IUser } from './user.interface'
 
 const UserSchema = new Schema({
-  username: {type: String, required: 'Username is required'},
-  password: {type: String, required: 'Password is required'},
+  username: { type: String, required: 'Username is required' },
+  password: { type: String, required: 'Password is required' },
   // roles: Array<Role>,
-  activated: {type: Boolean, default: false},
-  createdAt: {type: Date, default: Date.now},
-  createdBy: {type: String},
-  updatedAt: {type: Date},
-  updatedBy: {type: String}
+  activated: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+  createdBy: { type: String },
+  updatedAt: { type: Date },
+  updatedBy: { type: String },
 })
 
-export interface IUserModel extends Model<IUserDocument> {}
+export const Usermodel = mongoose.model<IUser>('User', UserSchema)
