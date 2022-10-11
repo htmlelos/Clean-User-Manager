@@ -7,6 +7,17 @@ describe('POST /register', () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
+  it('return status code 404 if endpoint does not exists', async () => {
+    const user = {
+      username: 'username@mail.com',
+      password: 'Pass2022$',
+      confirmPassword: 'Pass2022$',
+    }
+    const response = await request(app).post('/unknown').send(user)
+
+    expect(response.statusCode).toBe(404)
+  })
+
   it('returns status code 201 if user is signed up', async () => {
     // Dado
     const user = {

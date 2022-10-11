@@ -3,7 +3,7 @@ import { parseUser } from '../../../src/domain/user/user.validate'
 import { CustomError } from '../../../src/shared/types/custom.error'
 
 describe('Validate User', () => {
-  it('User has all data valid', () => {
+  it('return status code 201 if User has all data valid', () => {
     const user: IUser = {
       username: 'username@mail.com',
       password: 'Pass2022$',
