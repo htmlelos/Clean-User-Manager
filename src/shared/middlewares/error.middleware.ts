@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { CustomError, isCustomError } from '../types/custom.error'
 
 export const routeNotFound = (request: Request, response: Response) => {

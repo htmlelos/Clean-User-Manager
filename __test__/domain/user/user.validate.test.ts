@@ -67,4 +67,17 @@ describe('Validate User', () => {
       'The password and password confirmation must be equals'
     )
   })
+
+  it('return status code 400 if username is not a valid email address', () => {
+    const user = {
+      username: 'username',
+      password: 'Pass2022$',
+      confirmPassword: 'Pass2022$',
+    }
+
+    const response = parseUser(user)
+    const { status, message } = response as CustomError
+    expect(status).toBe(400)
+    expect(message).toBe('The username is not a valid email address')
+  })
 })
