@@ -1,5 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
-import { IUser } from './user.interface'
+import mongoose, { Schema, Document } from 'mongoose'
+import { IUserLogin } from './user.interface'
+
+export type UserDocument = IUserLogin & Document
 
 const UserSchema = new Schema({
   username: { type: String, required: 'Username is required' },
@@ -12,4 +14,4 @@ const UserSchema = new Schema({
   updatedBy: { type: String },
 })
 
-export const Usermodel = mongoose.model<IUser>('User', UserSchema)
+export const Usermodel = mongoose.model<IUserLogin>('User', UserSchema)
