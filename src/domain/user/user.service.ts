@@ -1,30 +1,34 @@
-import { Either, makeLeft, makeRight } from '../../shared/types/custom.error'
+import { Either, Right } from '../../shared/types/railway.error'
 import { IUserLogin, QueryUser } from './user.interface'
-import { UserDocument, Usermodel } from './user.schema'
-import { GetUserError, GetUsersError } from './user.validate'
+import {
+  CreateUserRepository,
+  FindOneUserRepository,
+  FindAllUsersRepository,
+} from './user.repository'
+import { UserDocument } from './user.schema'
+import {
+  ParseUserError,
+  ParseUserIdError,
+  ParseUserQueryError,
+} from './user.validate'
 
 export const createUserService = async (
-  user: IUserLogin
-): Promise<UserDocument> => {
-  return await Usermodel.create(user)
-}
-
-export const findUserByIdService = async (
-  userId: string
-): Promise<Either<GetUserError, UserDocument | null>> => {
-  const user = await Usermodel.findById(userId)
-  if (!user) {
-    makeLeft('USER_NOT_FOUND')
-  }
-  return makeRight(user)
+  createUserRepository: CreateUserRepository,
+  either: Right<IUserLogin>
+): Promise<Either<ParseUserError, UserDocument>> => {
+  return await createUserRepository(either)
 }
 
 export const findUserService = async (
-  query: QueryUser
-): Promise<Either<GetUsersError, Array<UserDocument> | null>> => {
-  const users = await Usermodel.find(query)
-  if (users.length) {
-    return makeLeft('USERS_NOT_FOUND')
-  }
-  return makeRight(users)
+  findOneUserRepository: FindOneUserRepository,
+  either: Right<string>
+): Promise<Either<ParseUserIdError, UserDocument | null>> => {
+  return await findOneUserRepository(either)
+}
+
+export const listUsersService = async (
+  findAllUsersRepository: FindAllUsersRepository,
+  either: Right<QueryUser>
+): Promise<Either<ParseUserQueryError, Array<UserDocument> | null>> => {
+  return await findAllUsersRepository(either)
 }
