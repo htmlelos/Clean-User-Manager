@@ -16,7 +16,7 @@
 - Devuelve un eror 404 si la api no existe
 - Retorna un error 400 si el nombre, email, password o passwordConfirmation no fueron provistos por el cliente
 - Retorna un error 400 si el password o el passwordConfirmation no son iguales
-- Retorna eun rror 400 si el campo email no es un correo electrónico válido
+- Retorna un error 400 si el campo email no es un correo electrónico válido
 - Retorna un error 403 si el correo electrónico provisto ya se encuentra en uso
 - Retorna un error 500 si se produce un error al intentar generar una contraseña encriptada
 - Retorna un error 500 si se produce un error al intentar crear una cuenta de usuario
